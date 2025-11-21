@@ -1,6 +1,6 @@
 # cuGraph Playground
 
-## Installation
+## Installation (didn't work, latest rapidsai on docker is 23.06, while Sirius uses 25.10)
 
 Pull image for prebuilt cuda env if you haven't
 ```bash
@@ -15,3 +15,15 @@ docker run --gpus all --rm -it \
   rapidsai/rapidsai:23.06-cuda11.8-runtime-ubuntu22.04-py3.10 \
   bash
 ```
+
+
+## Installation 2 - Conda
+```bash
+conda create -n rapids-25.10 -y
+conda activate rapids-25.10
+conda install -c rapidsai -c conda-forge -c nvidia \
+    rapidsai::libcudf=25.10 \
+    rapidsai::cudf=25.10 \
+    rapidsai::cugraph=25.10
+```
+
