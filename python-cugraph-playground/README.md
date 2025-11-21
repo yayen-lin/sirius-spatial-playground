@@ -18,6 +18,8 @@ docker run --gpus all --rm -it \
 
 
 ## Installation 2 - Conda
+
+Set up conda env
 ```bash
 conda create -n rapids-25.10 -y
 conda activate rapids-25.10
@@ -26,4 +28,10 @@ conda install -c rapidsai -c conda-forge -c nvidia \
     rapidsai::cudf=25.10 \
     rapidsai::cugraph=25.10
 ```
+
+To start conda env (if env already setup)
+```bash
+conda activate rapids-25.10
+```
+
 
