@@ -1,7 +1,18 @@
+"""
+Patterns observed:
+
+(p:Person)-[k:Knows]->(p2:Person)
+Person ⋈ (Person ⋈ Knows)
+
+
+
+"""
+
 import json
 import duckdb
 
 conn = duckdb.connect(":memory:")
+query = "SELECT * FROM graph_table(pg MATCH (p:Person)-[k:Knows]->(p2:Person) COLUMNS (p.name, p2.name));"
 
 conn.execute("INSTALL substrait FROM community;")
 conn.execute("INSTALL duckpgq FROM community;")
@@ -19,12 +30,10 @@ EDGE TABLES (Knows SOURCE KEY (src) REFERENCES Person (id)
                    DESTINATION KEY (dst) REFERENCES Person (id));
 """)
 
-result = conn.execute("SELECT * FROM graph_table(pg MATCH (p:Person)-[k:Knows]->(p2:Person) COLUMNS (p.name, p2.name));").fetchall()
+result = conn.execute(query).fetchall()
 for row in result:
     print(row)
 
-substrait_result = conn.execute("""
-CALL get_substrait_json('SELECT * FROM graph_table(pg MATCH (p:Person)-[k:Knows]->(p2:Person) COLUMNS (p.name, p2.name))');
-""").fetchone()
+substrait_result = conn.execute(f"CALL get_substrait_json('{query}');").fetchone()
 substrait_json = substrait_result[0]
 print(json.dumps(json.loads(substrait_json), indent=4))
