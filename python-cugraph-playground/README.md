@@ -17,7 +17,7 @@ docker run --gpus all --rm -it \
 ```
 
 
-## Installation 2 - Conda
+## RAPIDS Installation with Conda
 
 Set up conda env
 ```bash
@@ -33,5 +33,13 @@ To start conda env (if env already setup)
 ```bash
 conda activate rapids-25.10
 ```
+
+## DuckDB v1.2.1 Installation with Conda (to work with Substrait) 
+
+```bash
+conda activate rapids-25.10
+conda install -c conda-forge duckdb=1.2.1
+```
+
 
 

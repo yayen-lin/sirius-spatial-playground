@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Test Single-Source Shortest Path (SSPP, weighted shortest path) with cuGraph
-- Find shortest paths from one node to every node
+SSSP: Find shortest paths from one node to every node
 """
 
 import cudf
